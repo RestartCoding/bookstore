@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h1>register</h1>
+    <form action="/bookstore/users/register" method="post">
+        username: <input name="username"> <br/>
+        password: <input type="password" name="password"> <br/>
+        age: <input type="number" min="0" max="80" name="age"> <br/>
+        gender: male<input name="gender" type="radio" value="0"/>
+                female<input  name="gender" type="radio" value="1"> <br/>
+        phone number:<input type="tel" name="phoneNumber"> <br/>
+        <input type="submit" value="submit"/>
+    </form>
+</body>
+</html>

@@ -6,4 +6,6 @@ import com.bxia.bookstore.exception.ServiceException;
 public interface UserService {
 
     User login(String username, String password) throws ServiceException;
+
+    boolean register(User user);
 }

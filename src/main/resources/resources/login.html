@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<form name="loginForm" action="/bookstore/users/login" method="post">
+    username: <input name="username"/> <br/>
+    password: <input type="password" name="password"/> <br/>
+    <input type="button" value="submit" onclick="login();"/>
+    <input type="button" value="register" onclick="location.href='/bookstore/register.html'">
+</form>
+</body>
+<script>
+    function login() {
+        axios.request({
+            url: '/bookstore/users/login',
+            method: 'post',
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
+            data: {
+                username: document.forms[0].username.value,
+                password: document.forms[0].password.value
+            }
+        })
+            .then(function (response) {
+                console.log(response);
+                location.href = 'index.html';
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+</script>
+</html>
