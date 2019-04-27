@@ -26,9 +26,31 @@ public class UserController {
         User result = userService.login(user.getUsername(), user.getPassword());
         return CommonResponse.ok(result);
     }
-
     @PostMapping("/register")
-    public CommonResponse register(@ModelAttribute User user){
+    public CommonResponse register(User user){
         return CommonResponse.ok(userService.register(user));
+    }
+
+    @GetMapping("/{id}")
+    public CommonResponse getUserInfo(@PathVariable int id){
+        return CommonResponse.ok(userService.getUserInfo(id));
+    }
+
+    @PutMapping
+    public CommonResponse updateUserInfo(@RequestBody User user){
+        boolean success = userService.updateUserInfo(user);
+        if (success){
+            return CommonResponse.ok("修改用户信息成功");
+        }
+        return CommonResponse.error("修改用户信息失败");
+    }
+
+    @DeleteMapping("/{id}")
+    public CommonResponse deleteUser(@PathVariable int id){
+        boolean success = userService.deleteUser(id);
+        if (success){
+            return CommonResponse.ok("删除用户信息成功");
+        }
+        return CommonResponse.error("删除用户信息失败");
     }
 }

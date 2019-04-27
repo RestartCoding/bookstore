@@ -8,4 +8,10 @@ public interface UserService {
     User login(String username, String password) throws ServiceException;
 
     boolean register(User user);
+
+    User getUserInfo(int id);
+
+    boolean updateUserInfo(User user);
+
+    boolean deleteUser(int id);
 }

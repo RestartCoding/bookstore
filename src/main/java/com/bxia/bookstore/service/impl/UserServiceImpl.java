@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
     public User login(String username, String password) throws ServiceException {
         User user = userMapper.selectOne(new QueryWrapper<User>().allEq(
                 Map.of("username", username, "password", password)));
-        if(null == user){
+        if (null == user) {
             throw new UserNotFoundException("用户名或密码错误");
         }
         return user;
@@ -31,9 +31,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean register(User user) {
         User one = userMapper.selectOne(new QueryWrapper<>(user, "username"));
-        if (null != one){
+        if (null != one) {
             throw new UserAlreadyExistsException("用户名[" + user.getUsername() + "]已存在");
         }
         return userMapper.insert(user) == 1;
+    }
+
+    @Override
+    public User getUserInfo(int id) {
+        return userMapper.selectById(id);
+    }
+
+    @Override
+    public boolean updateUserInfo(User user) {
+        return userMapper.updateById(user) == 1;
+    }
+
+    @Override
+    public boolean deleteUser(int id) {
+        return userMapper.deleteById(id) == 1;
     }
 }
