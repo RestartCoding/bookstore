@@ -19,7 +19,7 @@ public class BookRepositoryTest {
 
     @Test
     public void testSave(){
-        Book result = bookRepository.save(Book.builder().id(1).bookName("Thinking in java").build());
+        Book result = bookRepository.save(Book.builder().bookName("Thinking in java").build());
         assertNotNull(result);
     }
 }

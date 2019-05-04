@@ -3,8 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <h1>welcome</h1>
+<h1>Welcome, your book store!</h1>
+<table border="1px">
+    <thead>
+    <tr>
+        <th>bookName</th>
+        <th>author</th>
+        <th>price</th>
+        <th>inventory</th>
+    </tr>
+    </thead>
+    <tbody id="books">
+    <tr v-for="book in books">
+        <td>{{book.bookName}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.price}}</td>
+        <td>{{book.inventory}}</td>
+    </tr>
+    </tbody>
+</table>
+<div id="addBook">
+    <a href="/bookstore/add-book.html"><input type="button" value="add book"></a>
+</div>
 </body>
+<script>
+    var books = new Vue({
+        el: "#books",
+        data: {
+            books: []
+        },
+        created: function () {
+            axios.get('/bookstore/books')
+                .then(function (response) {
+                    this.books = response.data;
+                }).catch(function (err) {
+                alert(err.errMsg);
+            })
+        },
+        watch: {
+            books(n, o){
+                console.log(n);
+                console.log(o);
+            }
+        }
+    });
+</script>
 </html>

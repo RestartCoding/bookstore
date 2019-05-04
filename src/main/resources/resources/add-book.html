@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add book</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div>
+    <form name="book">
+        book name: <input name="bookName"> <br/>
+        author: <input name="author"> <br/>
+        price: <input type="number" name="price"> <br/>
+        inventory: <input type="number" name="inventory"> <br/>
+    </form>
+</div>
+<div id="addBookButton">
+    <input type="button" value="confirm" v-on:click="addBook">
+</div>
+</body>
+<script>
+    var addBookButton = new Vue({
+        el: '#addBookButton',
+        methods: {
+            addBook: function () {
+                console.log(document.forms.book);
+                axios.request({
+                    url: 'http://localhost:8080/bookstore/books',
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json;charset=utf-8'},
+                    data: {
+                        bookName: document.forms['book'].bookName.value,
+                        author: document.forms['book'].author.value,
+                        price: document.forms['book'].price.value,
+                        inventory: document.forms['book'].inventory.value
+                    }
+                }).then(function (response) {
+                    location.assign("/bookstore");
+                }).catch(function (error) {
+                    alert('添加失败: ' + error.errMsg);
+                })
+            }
+        }
+    });
+</script>
+</html>
